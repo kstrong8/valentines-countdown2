@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine’s Day 💘</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Arial', sans-serif;
+  background:linear-gradient(135deg,#ff9ecf,#ffd6ec);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  color:#b30059;
+  overflow:hidden;
+}
+
+.card{
+  background:white;
+  padding:40px 30px;
+  border-radius:30px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.15);
+  width:90%;
+  max-width:400px;
+  position:relative;
+  z-index:2;
+}
+
+h1{
+  font-size:1.6em;
+  margin-bottom:20px;
+}
+
+#countdown{
+  font-size:3em;
+  font-weight:bold;
+  margin:20px 0;
+  color:#ff007f;
+  text-shadow:0 0 15px rgba(255,0,127,0.4);
+}
+
+.message{
+  font-size:1.1em;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.secret{
+  margin-top:15px;
+  font-size:1.2em;
+  color:#e60073;
+  display:none;
+  font-weight:bold;
+}
+
+iframe{
+  margin-top:20px;
+  border-radius:15px;
+}
+
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:float 6s linear infinite;
+  color:#ff4d88;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-900px);opacity:0;}
+}
+</style>
+</head>
+
+<body onclick="showSecret()">
+
+<div class="card">
+  <h1>💖 Valentine’s Countdown 💖</h1>
+
+  <div id="countdown"></div>
+
+  <div class="message">
+    I LOVE YOU BABY!! <br>
+    CAN'T WAIT TO SPEND TIME WITH YOU ALL WEEKEND!
+  </div>
+
+  <div class="secret" id="secretMessage">
+    let me think about you all night ;P
+  </div>
+
+  <!-- YouTube Embed starting at 0:40 -->
+  <iframe width="100%" height="200"
+    src="https://www.youtube.com/embed/kLPtYssMFgI?start=40&autoplay=1"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+</div>
+
+<script>
+const now = new Date();
+const target = new Date();
+target.setDate(now.getDate()+1);
+target.setHours(16,30,0,0);
+
+function update(){
+  const diff = target - new Date();
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML="IT’S 4:30PM 💘";
+    return;
+  }
+  const h = Math.floor((diff/(1000*60*60))%24);
+  const m = Math.floor((diff/(1000*60))%60);
+  const s = Math.floor((diff/1000)%60);
+
+  document.getElementById("countdown").innerHTML =
+    h + "h " + m + "m " + s + "s";
+}
+
+setInterval(update,1000);
+update();
+
+function showSecret(){
+  document.getElementById("secretMessage").style.display="block";
+}
+
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.bottom = "0";
+  document.body.appendChild(heart);
+  setTimeout(()=> heart.remove(),6000);
+},400);
+</script>
+
+</body>
+</html>
